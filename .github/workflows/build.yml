@@ -5,7 +5,7 @@ on:
     branches:
       - main
     tags:
-      - "weather-state-publisher-v*"
+      - "v*"
   pull_request:
   workflow_dispatch:
 
@@ -50,7 +50,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
             type=ref,event=branch
             type=sha,prefix=sha-
-            type=match,pattern=weather-state-publisher-v(.*),group=1
+            type=semver,pattern={{version}}
       - name: Build and publish image
         uses: docker/build-push-action@v6
         with:
